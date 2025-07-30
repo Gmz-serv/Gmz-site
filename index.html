@@ -2,30 +2,44 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GMZ - Multisserviços</title>
+  <meta name="description" content="GMZ Serviços: roupas, instalações residenciais, montagem de electrobombas, antenas parabólicas e pintura. Qualidade e dedicação." />
+  <link rel="icon" href="logo.png" type="image/png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-p1U3qD0g8gYdVQO0XQ2vPYkEdZrgBpi0XtZ4vSLG6NBrU2j7+Z9Ml4W2dIC1PxERrT1qxI2lgC6j4Ge6IVZjgQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     :root {
       --azul: #0d6efd;
-      --preto: #111;
       --verde: #198754;
+      --preto: #111;
+      --cinza-escuro: #222;
       --branco: #fff;
+      --cinza-claro: #ccc;
     }
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', Arial, sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
     }
     body {
       background: var(--preto);
       color: var(--branco);
       line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
     header {
       background: linear-gradient(90deg, var(--azul), var(--verde));
       padding: 1rem 2rem;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       position: sticky;
@@ -38,127 +52,155 @@
     header h1 {
       font-size: 1.5rem;
       margin-left: 20px;
+      color: var(--branco);
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
     }
     nav a {
       color: var(--branco);
-      margin-left: 1rem;
       text-decoration: none;
       transition: color 0.3s;
+      font-weight: 600;
     }
-    nav a:hover {
-      color: #ccc;
+    nav a:hover,
+    nav a:focus {
+      color: var(--cinza-claro);
+      outline: none;
+    }
+    .lang-switch {
+      display: flex;
+      gap: 0.5rem;
+      margin-left: auto;
+    }
+    .lang-switch button {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--branco);
+      transition: color 0.3s;
+    }
+    .lang-switch button:hover,
+    .lang-switch button:focus {
+      color: var(--cinza-claro);
+      outline: none;
+    }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--branco);
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    nav.active {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: var(--azul);
+      padding: 1rem 2rem;
+      position: absolute;
+      top: 60px;
+      right: 2rem;
+      border-radius: 8px;
+      z-index: 100;
+    }
+    main {
+      flex: 1;
     }
     section {
       padding: 3rem 2rem;
       animation: fadeIn 1s ease-in;
-    }
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    .home { background: var(--azul); text-align: center; }
-    .produtos { background: var(--preto); }
-    .sobre { background: var(--verde); }
-    .contato { background: #222; }
-    .notificacoes { background: #333; }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-width: 500px;
+      max-width: 900px;
       margin: auto;
     }
-    input, textarea, button {
-      padding: 0.8rem;
-      border: none;
-      border-radius: 5px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    input, textarea {
-      background: #444;
-      color: var(--branco);
-    }
-    button {
-      background: var(--verde);
-      color: var(--branco);
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    button:hover {
+    .home {
       background: var(--azul);
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(13, 110, 253, 0.4);
     }
-    .whatsapp-btn {
-      display: inline-block;
-      background-color: #25d366;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      text-decoration: none;
+    .produtos {
+      background: var(--preto);
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(17, 17, 17, 0.8);
+    }
+    .sobre {
+      background: var(--verde);
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(25, 135, 84, 0.4);
+    }
+    .contato {
+      background: var(--cinza-escuro);
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(34, 34, 34, 0.8);
+    }
+    .notificacoes {
+      background: #333;
+      border-radius: 10px;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    ul li {
+      padding: 0.5rem 0;
       font-size: 1.2rem;
-      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .whatsapp-btn:hover {
-      background-color: #128c7e;
+    ul li i {
+      color: var(--verde);
+      min-width: 20px;
+      text-align: center;
     }
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      nav {
-        margin-top: 0.5rem;
-      }
+    footer {
+      background: linear-gradient(90deg, var(--azul), var(--verde));
+      color: var(--branco);
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-top: 2px solid #444;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="GMZ Logo" />
-    <h1>GMZ Serviços</h1>
-    <nav>
+    <div style="display: flex; align-items: center;">
+      <img src="logo.png" alt="GMZ Logo" />
+      <h1>GMZ Serviços</h1>
+    </div>
+    <nav id="menu">
       <a href="#home">Home</a>
-      <a href="#produtos">Produtos/Serviços</a>
+      <a href="#produtos">Produtos</a>
       <a href="#sobre">Sobre</a>
       <a href="#contato">Contato</a>
       <a href="#notificacoes">Notificações</a>
     </nav>
   </header>
-  <section id="home" class="home">
-    <h2>Bem-vindo à GMZ</h2>
-    <p>Especialistas em roupas, instalações residenciais, montagem de electrobombas, antenas parabólicas e pintura.</p>
-  </section>
-  <section id="produtos" class="produtos">
-    <h2>Produtos e Serviços</h2>
-    <ul>
-      <li>Vendas de roupas</li>
-      <li>Instalações residenciais</li>
-      <li>Montagem de electrobomba</li>
-      <li>Montagem de antena parabólica</li>
-      <li>Serviços de pintura</li>
-    </ul>
-  </section>
-  <section id="sobre" class="sobre">
-    <h2>Sobre a GMZ</h2>
-    <p>A GMZ é uma mini empresa que combina experiência e dedicação para oferecer soluções em várias áreas. Compromisso com a qualidade e satisfação dos nossos clientes.</p>
-  </section>
-  <section id="contato" class="contato">
-    <h2>Fale Conosco</h2>
-    <form>
-      <input type="text" placeholder="Seu nome" required>
-      <input type="email" placeholder="Seu e-mail" required>
-      <textarea rows="4" placeholder="Sua mensagem" required></textarea>
-      <button type="submit">Enviar</button>
-    </form>
-    <a href="https://wa.me/25884XXXXXXX" target="_blank" class="whatsapp-btn">Fale pelo WhatsApp</a>
-  </section>
-  <section id="notificacoes" class="notificacoes">
-    <h2>Notificações</h2>
-    <p>Fique atento às promoções e novidades da GMZ aqui.</p>
-  </section>
+  <main>
+    <section id="home" class="home">
+      <h2>Bem-vindo à GMZ</h2>
+      <p>Especialistas em roupas, instalações residenciais, montagem de electrobombas, antenas parabólicas e pintura.</p>
+    </section>
+  </main>
+  <footer>
+    <p>© 2025 GMZ Serviços - Todos os direitos reservados.</p>
+  </footer>
 </body>
 </html>
